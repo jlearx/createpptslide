@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using Microsoft.Office.Interop.PowerPoint;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Office.Core;
 
 namespace CreatePowerPointSlide
 {
@@ -211,7 +213,7 @@ namespace CreatePowerPointSlide
         {
             if (rtText.SelectionLength > 1)
             {
-                Font currentFont = rtText.SelectionFont;
+                System.Drawing.Font currentFont = rtText.SelectionFont;
                 FontStyle newFontStyle = new FontStyle();
 
                 if (currentFont.Bold)
@@ -222,10 +224,51 @@ namespace CreatePowerPointSlide
                     newFontStyle = FontStyle.Bold;
                 }
 
-                rtText.SelectionFont = new Font(currentFont, newFontStyle);
+                rtText.SelectionFont = new System.Drawing.Font(currentFont, newFontStyle);
             }
 
             rtText.Focus();
+        }
+
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.PowerPoint.Application pptApplication = new Microsoft.Office.Interop.PowerPoint.Application();
+
+            Microsoft.Office.Interop.PowerPoint.Slides slides;
+            Microsoft.Office.Interop.PowerPoint._Slide slide;
+            Microsoft.Office.Interop.PowerPoint.TextRange objText;
+
+            // Create the Presentation File
+            Presentation pptPresentation = pptApplication.Presentations.Add(MsoTriState.msoTrue);
+
+            Microsoft.Office.Interop.PowerPoint.CustomLayout customLayout = pptPresentation.SlideMaster.CustomLayouts[Microsoft.Office.Interop.PowerPoint.PpSlideLayout.ppLayoutText];
+
+            // Create new Slide
+            slides = pptPresentation.Slides;
+            slide = slides.AddSlide(1, customLayout);
+
+            // Add title
+            objText = slide.Shapes[1].TextFrame.TextRange;
+            objText.Text = txtTitle.Text.Trim();
+            objText.Font.Name = "Arial";
+            objText.Font.Size = 32;
+
+            // Add body text
+            objText = slide.Shapes[2].TextFrame.TextRange;
+            objText.Text = rtText.Text.Trim();
+
+            // Get list of selected images
+            foreach (object file in chkLstImages.CheckedItems)
+            {
+                string fileName = file.ToString();
+
+                // Insert Image
+                Microsoft.Office.Interop.PowerPoint.Shape shape = slide.Shapes[2];
+                slide.Shapes.AddPicture(fileName, Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoTrue, shape.Width / 2, shape.Top * 2, shape.Width / 2, shape.Height / 2);
+            }
+
+            pptPresentation.SaveAs(@"c:\temp\result.pptx", Microsoft.Office.Interop.PowerPoint.PpSaveAsFileType.ppSaveAsDefault, MsoTriState.msoTrue);
+
         }
     }
 }

@@ -49,6 +49,7 @@
             this.btnCreate.TabIndex = 0;
             this.btnCreate.Text = "Create Slide";
             this.btnCreate.UseVisualStyleBackColor = true;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
             // txtTitle
             // 
