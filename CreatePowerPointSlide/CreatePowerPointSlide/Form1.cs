@@ -136,8 +136,8 @@ namespace CreatePowerPointSlide
             // Fix the suggest word array size, now that it is known
             Array.Resize(ref suggestWords, pos);
 
+            // Uses the User's Pictures folder
             string picturePath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-            //picturePath = "U:\\Users\\Public\\Pictures"; DEBUG
             imageList = new string[99999];
             iLPos = 0;
             
@@ -216,11 +216,14 @@ namespace CreatePowerPointSlide
                 System.Drawing.Font currentFont = rtText.SelectionFont;
                 FontStyle newFontStyle = new FontStyle();
 
+                // Is the word already bold?
                 if (currentFont.Bold)
                 {
+                    // If so, toggle it
                     newFontStyle = FontStyle.Regular;
                 } else
                 {
+                    // If not, toggle it
                     newFontStyle = FontStyle.Bold;
                 }
 
@@ -267,8 +270,16 @@ namespace CreatePowerPointSlide
                 slide.Shapes.AddPicture(fileName, Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoTrue, shape.Width / 2, shape.Top * 2, shape.Width / 2, shape.Height / 2);
             }
 
+            // Launch PowerPoint
             pptPresentation.SaveAs(@"c:\temp\result.pptx", Microsoft.Office.Interop.PowerPoint.PpSaveAsFileType.ppSaveAsDefault, MsoTriState.msoTrue);
 
+        }
+
+        private void chkLstImages_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Display the image in the picture box
+            pictBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictBox.ImageLocation = chkLstImages.SelectedItem.ToString();
         }
     }
 }

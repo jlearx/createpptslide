@@ -36,9 +36,10 @@
             this.btnSuggestImg = new System.Windows.Forms.Button();
             this.chkLstImages = new System.Windows.Forms.CheckedListBox();
             this.lblSuggestImgs = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictBox = new System.Windows.Forms.PictureBox();
             this.btnToggleBold = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.label1 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pictBox)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCreate
@@ -46,7 +47,7 @@
             this.btnCreate.Location = new System.Drawing.Point(81, 466);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(75, 23);
-            this.btnCreate.TabIndex = 0;
+            this.btnCreate.TabIndex = 4;
             this.btnCreate.Text = "Create Slide";
             this.btnCreate.UseVisualStyleBackColor = true;
             this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
@@ -56,7 +57,7 @@
             this.txtTitle.Location = new System.Drawing.Point(81, 21);
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(693, 20);
-            this.txtTitle.TabIndex = 1;
+            this.txtTitle.TabIndex = 0;
             // 
             // lblTitle
             // 
@@ -81,7 +82,7 @@
             this.rtText.Location = new System.Drawing.Point(81, 97);
             this.rtText.Name = "rtText";
             this.rtText.Size = new System.Drawing.Size(693, 159);
-            this.rtText.TabIndex = 4;
+            this.rtText.TabIndex = 1;
             this.rtText.Text = "";
             // 
             // btnSuggestImg
@@ -89,7 +90,7 @@
             this.btnSuggestImg.Location = new System.Drawing.Point(81, 262);
             this.btnSuggestImg.Name = "btnSuggestImg";
             this.btnSuggestImg.Size = new System.Drawing.Size(106, 23);
-            this.btnSuggestImg.TabIndex = 5;
+            this.btnSuggestImg.TabIndex = 2;
             this.btnSuggestImg.Text = "Suggest Images";
             this.btnSuggestImg.UseVisualStyleBackColor = true;
             this.btnSuggestImg.Click += new System.EventHandler(this.btnSuggestImg_Click);
@@ -100,7 +101,8 @@
             this.chkLstImages.Location = new System.Drawing.Point(81, 353);
             this.chkLstImages.Name = "chkLstImages";
             this.chkLstImages.Size = new System.Drawing.Size(484, 94);
-            this.chkLstImages.TabIndex = 6;
+            this.chkLstImages.TabIndex = 3;
+            this.chkLstImages.SelectedIndexChanged += new System.EventHandler(this.chkLstImages_SelectedIndexChanged);
             // 
             // lblSuggestImgs
             // 
@@ -111,13 +113,13 @@
             this.lblSuggestImgs.TabIndex = 7;
             this.lblSuggestImgs.Text = "Suggested Images";
             // 
-            // pictureBox1
+            // pictBox
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(612, 353);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 94);
-            this.pictureBox1.TabIndex = 8;
-            this.pictureBox1.TabStop = false;
+            this.pictBox.Location = new System.Drawing.Point(571, 272);
+            this.pictBox.Name = "pictBox";
+            this.pictBox.Size = new System.Drawing.Size(203, 246);
+            this.pictBox.TabIndex = 8;
+            this.pictBox.TabStop = false;
             // 
             // btnToggleBold
             // 
@@ -125,17 +127,27 @@
             this.btnToggleBold.Name = "btnToggleBold";
             this.btnToggleBold.Size = new System.Drawing.Size(75, 23);
             this.btnToggleBold.TabIndex = 9;
-            this.btnToggleBold.Text = "Bold";
+            this.btnToggleBold.Text = "Bold*";
             this.btnToggleBold.UseVisualStyleBackColor = true;
             this.btnToggleBold.Click += new System.EventHandler(this.btnFormat_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(205, 268);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(204, 13);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "* - Bold words are used to suggest images";
             // 
             // frmCreateSlide
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 530);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnToggleBold);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pictBox);
             this.Controls.Add(this.lblSuggestImgs);
             this.Controls.Add(this.chkLstImages);
             this.Controls.Add(this.btnSuggestImg);
@@ -146,7 +158,7 @@
             this.Controls.Add(this.btnCreate);
             this.Name = "frmCreateSlide";
             this.Text = "Create PowerPoint Slide";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -162,8 +174,9 @@
         private System.Windows.Forms.Button btnSuggestImg;
         private System.Windows.Forms.CheckedListBox chkLstImages;
         private System.Windows.Forms.Label lblSuggestImgs;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictBox;
         private System.Windows.Forms.Button btnToggleBold;
+        private System.Windows.Forms.Label label1;
     }
 }
 
